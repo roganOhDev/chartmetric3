@@ -1,13 +1,13 @@
 export class AnswerDataDto {
-  constructor(x, tooltip) {
+  constructor(x, trackName) {
     this.x = x;
     this.y = 1;
-    this.tracks = [tooltip];
+    this.tracks = [trackName];
     this.tooltip = ``;
   }
 
-  addNewTooltip(newToolTip) {
-    this.tracks.push(newToolTip);
+  addNewTrackName(trackName) {
+    this.tracks.push(trackName);
     this.y++;
   }
 
@@ -15,11 +15,11 @@ export class AnswerDataDto {
     const groupedTracks = {};
 
     this.tracks.forEach(track => {
-      if (!groupedTracks[track]) {
-        groupedTracks[track] = 1;
+      if (groupedTracks[track]) {
+        groupedTracks[track]++;
 
       } else {
-        groupedTracks[track]++;
+        groupedTracks[track] = 1;
       }
     });
 
@@ -28,12 +28,5 @@ export class AnswerDataDto {
     }
 
     this.tooltip = this.tooltip.slice(0, -2);
-  }
-}
-
-AnswerDataDto.Track = class {
-  constructor(name) {
-    this.name = name;
-    this.cnt = 1;
   }
 }

@@ -2,29 +2,35 @@ import { response as sampleApiResponse } from './sampleApiResponse.js';
 import { AnswerDataDto } from './dto/answerDataDto.js';
 import { OriginDataDto } from "./dto/originDataDto.js";
 
+
 function solveProblem1(originData) {
   const originDataDtos = transformOriginDataIntoDto(originData);
 
-  const mapByDate = new Map();
+  const mapByTimestp = createMapByTimestp(originDataDtos);
 
-  originDataDtos.forEach(originDataDto => {
-    const tracks = originDataDto.tracks;
-
-    tracks.forEach(track => {
-      if (mapByDate.has(track.timestp)) {
-        mapByDate.get(track.timestp).addNewTooltip(track.trackName);
-
-      } else {
-        mapByDate.set(track.timestp, new AnswerDataDto(track.timestp, track.trackName));
-      }
-    });
-  });
-
-  mapByDate.forEach(e => e.setToolTip());
-
-  return Array.from(mapByDate.values()).sort((a, b) => {
+  return Array.from(mapByTimestp.values()).sort((a, b) => {
     return new Date(a.x) - new Date(b.x);
   })
+}
+
+function createMapByTimestp(originDataDtos) {
+  const mapByTimestp = new Map();
+
+  originDataDtos.forEach(originDataDto => pushTrackIntoMap(originDataDto.tracks, mapByTimestp));
+
+  mapByTimestp.forEach(e => e.setToolTip());
+  return mapByTimestp;
+}
+
+function pushTrackIntoMap(tracks, mapByTimestp) {
+  tracks.forEach(track => {
+    if (mapByTimestp.has(track.timestp)) {
+      mapByTimestp.get(track.timestp).addNewTrackName(track.trackName);
+
+    } else {
+      mapByTimestp.set(track.timestp, new AnswerDataDto(track.timestp, track.trackName));
+    }
+  });
 }
 
 function transformOriginDataIntoDto(originData) {
