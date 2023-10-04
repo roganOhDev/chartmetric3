@@ -4,12 +4,11 @@ export class OriginDataDto {
     this.name = name;
     this.tracks = tracks;
   }
+}
 
-  Track = class Track{
-    constructor(timestamp, trackName){
-      this.timestp = timestamp;
-      this.trackName = trackName;
-    }
+OriginDataDto.Track = class {
+  constructor(timestamp, trackName) {
+    this.timestp = timestamp;
+    this.trackName = trackName;
   }
-
 }
