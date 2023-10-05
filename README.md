@@ -4,10 +4,6 @@
 I solve this question with JavaScript. Please run index.js
 
 ## Run
-* npm install
-```
-npm install
-```
 
 * run
 ```
