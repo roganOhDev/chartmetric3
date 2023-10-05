@@ -8,9 +8,9 @@ function solveProblem(originData) {
 
   const mapByTimestp = createMapByTimestp(originDataDtos);
 
-  return Array.from(mapByTimestp.values()).sort((a, b) => {
-    return new Date(a.x) - new Date(b.x);
-  })
+  return Array.from(mapByTimestp.values())
+    .map(e => e.chooseReturnFields())
+    .sort((a, b) => new Date(a.x) - new Date(b.x));
 }
 
 function createMapByTimestp(originDataDtos) {

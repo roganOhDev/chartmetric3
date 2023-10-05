@@ -6,6 +6,14 @@ export class AnswerDataDto {
     this.tooltip = ``;
   }
 
+  chooseReturnFields() {
+    return {
+      x: this.x,
+      y: this.y,
+      tooltip: this.tooltip
+    }
+  }
+
   addNewTrackName(trackName) {
     this.tracks.push(trackName);
     this.y++;
